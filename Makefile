@@ -1,2 +1,2 @@
 default:
-	nasm -fbin bootsec.asm -o bootsec.bin && qemu-system-x86_64 -nographic bootsec.bin
+	nasm -fbin main.asm -o boot.bin && qemu-system-x86_64 -nographic boot.bin
