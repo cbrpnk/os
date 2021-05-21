@@ -8,6 +8,9 @@ mov sp, bp
 ;mov ax, 5
 ;call print_hex_buf
 
+mov bx, str
+call print
+
 mov bx, 0x9000
 call disk_read
 mov ax, 512
@@ -20,7 +23,7 @@ jmp $ ; infinite loop
 %include "disk.asm"
 
 str:
-	db "abcde"
+	db "Manu Boot Loader", 0x0a, 0
 
 ; Padding + Magic number
 times 510-($-$$) db 0

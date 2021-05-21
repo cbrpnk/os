@@ -1,3 +1,17 @@
+; Print null terminated ASCII string in bx
+print:
+	pusha
+	print_loop:
+		mov dl, [bx]
+		cmp dl, 0
+		je print_end
+		call print_char
+		inc bx
+		jmp print_loop
+	print_end:
+		popa
+		ret
+
 ; Get len in ax, buff in bx
 print_hex_buf:
 	pusha
@@ -16,6 +30,14 @@ print_hex_buf:
 	end:
 		popa
 		ret
+
+print_char:
+	pusha
+	mov ah, 0x0e
+	mov al, dl
+	int 0x10
+	popa
+	ret
 
 ; Get byte in dx
 print_hex_byte:
