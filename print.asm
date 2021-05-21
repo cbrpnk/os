@@ -1,5 +1,4 @@
 ; Get len in ax, buff in bx
-; TODO Print space between bytes
 print_hex_buf:
 	pusha
 	mov cx, 0 ; Init counter
@@ -17,14 +16,6 @@ print_hex_buf:
 	end:
 		popa
 		ret
-
-print_char:
-	pusha
-	mov ah, 0x0e
-	mov al, dl
-	int 0x10
-	popa
-	ret
 
 ; Get byte in dx
 print_hex_byte:
