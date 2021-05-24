@@ -20,8 +20,8 @@ gdt_data:
 	db 0x00			; Base address 31-24
 	
 gdt_descriptor:
-	dw 24-1			; Size - 1 (Why -1, idk)
-	dd gdt			; Address
+	dw gdt_descriptor - gdt - 1		; Size - 1 (Why -1, idk)
+	dd gdt							; Address
 
 ; Segment offsets used to populate the segment registers
 CODE_SEGMENT equ gdt_code - gdt
