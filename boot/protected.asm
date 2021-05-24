@@ -26,6 +26,6 @@ cls_loop:
 	inc cx
 	inc edx
 	jmp cls_loop
-cls_end
+cls_end:
 	popa
 	ret
