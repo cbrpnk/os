@@ -25,9 +25,10 @@
 #define VGA_BG_GREY  0x80
 #define VGA_BG_WHITE 0xf0
 
-int print(const char *str, uint8_t col)
+int print(const char *str, uint8_t x, uint8_t y, uint8_t col)
 {
     uint16_t *vga = (uint16_t *) VGA_BUFFER_ADDR;
+    vga += (x + y*80);
     const char *c = str;
     
     while(*c != 0) {
@@ -41,6 +42,11 @@ int print(const char *str, uint8_t col)
 
 int main()
 {
-    print("MANUX V0.0.1", VGA_FG_GREEN);
+    print("M", 0, 0, VGA_FG_GREEN);
+    print("A", 1, 0, VGA_FG_RED);
+    print("N", 2, 0, VGA_FG_GREEN | VGA_FG_BLUE);
+    print("U", 3, 0, VGA_FG_RED | VGA_FG_GREEN);
+    print("X", 4, 0, VGA_FG_RED | VGA_FG_BLUE);
+    print(" V0.0.1", 5, 0, VGA_FG_GREEN);
     return 0;
 }
