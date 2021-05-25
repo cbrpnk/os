@@ -47,6 +47,6 @@ int main()
     print("N", 2, 0, VGA_FG_GREEN | VGA_FG_BLUE);
     print("U", 3, 0, VGA_FG_RED | VGA_FG_GREEN);
     print("X", 4, 0, VGA_FG_RED | VGA_FG_BLUE);
-    print(" V0.0.1", 5, 0, VGA_FG_GREEN);
+    print(" V0.0.1", 5, 0, VGA_FG_WHITE);
     return 0;
 }

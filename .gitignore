@@ -1,1 +1,4 @@
+boot/*.bin
+kernel/*.o
+kernel/*.bin
 os.img
