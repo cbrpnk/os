@@ -5,6 +5,7 @@ default:
 	cd kernel && $(MAKE)
 	# Create image
 	cat boot/boot.bin kernel/kernel.bin > os.img
+	ls -lh kernel/kernel.bin
 	# Boot
 	qemu-system-x86_64 os.img
 

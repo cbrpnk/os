@@ -1,5 +1,7 @@
 #include <stdint.h>
 
+#include "vga.h"
+
 /* TODO
   - [ ] Make sure the Bootlaoder loads the full kernel, not just the 2nd sector
   - [ ] Make continuous outputing to screen
@@ -9,44 +11,25 @@
   - [ ] Test on real hardware
 */
 
-#define VGA_BUFFER_ADDR 0xb8000
-
-#define VGA_FG_BACK  0x00
-#define VGA_FG_BLUE  0x01
-#define VGA_FG_GREEN 0x02
-#define VGA_FG_RED   0x04
-#define VGA_FG_GREY  0x08
-#define VGA_FG_WHITE 0x0f
-
-#define VGA_BG_BLACK 0x00
-#define VGA_BG_BLUE  0x10
-#define VGA_BG_GREEN 0x20
-#define VGA_BG_RED   0x40
-#define VGA_BG_GREY  0x80
-#define VGA_BG_WHITE 0xf0
-
-int print(const char *str, uint8_t x, uint8_t y, uint8_t col)
+// Sets up the interup descriptor table
+int idt_setup()
 {
-    uint16_t *vga = (uint16_t *) VGA_BUFFER_ADDR;
-    vga += (x + y*80);
-    const char *c = str;
-    
-    while(*c != 0) {
-        *vga = (((uint16_t) col) << 8) | *c;
-        ++vga;
-        ++c;
-    }
     
     return 0;
 }
 
 int main()
 {
-    print("M", 0, 0, VGA_FG_GREEN);
-    print("A", 1, 0, VGA_FG_RED);
-    print("N", 2, 0, VGA_FG_GREEN | VGA_FG_BLUE);
-    print("U", 3, 0, VGA_FG_RED | VGA_FG_GREEN);
-    print("X", 4, 0, VGA_FG_RED | VGA_FG_BLUE);
-    print(" V0.0.1", 5, 0, VGA_FG_WHITE);
+    // Welcome message
+    vga_print("Manux V0.0.1", 0, 0, VGA_BLACK, VGA_GREEN);
+    
+    // IDT
+    vga_print("Setting up IDT...", 0, 1, VGA_BLACK, VGA_WHITE);
+    if(idt_setup() == 0) {
+        vga_print("[OK]", 17, 1, VGA_BLACK, VGA_WHITE);
+    } else {
+        vga_print("[ERROR]", 17, 1, VGA_BLACK, VGA_WHITE);
+    }
+    
     return 0;
 }

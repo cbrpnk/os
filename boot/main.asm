@@ -5,14 +5,9 @@
 mov bp, 0x9000
 mov sp, bp
 
-;mov bx, MSG
-;call print
-
 ; Load kernel
 mov bx, 0x1000	; Kernel offset
 call disk_read
-;mov ax, 512
-;call print_hex_buf
 
 ; Switch to 32bit protected mode
 cli						; Clear interupts
